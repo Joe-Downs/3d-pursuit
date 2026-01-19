@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://kbpgmtsd7bv2"]
+[gd_scene load_steps=11 format=3 uid="uid://kbpgmtsd7bv2"]
 
 [ext_resource type="Script" uid="uid://cpsxuj07q1drc" path="res://ship.gd" id="1_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://da6skqrp425xh" path="res://assets/enterprise.glb" id="1_noarx"]
-[ext_resource type="PackedScene" uid="uid://c4mgiroltsbp7" path="res://assets/bird-o-prey.glb" id="2_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://dteso3bdlgpgi" path="res://assets/bird-o-prey.glb" id="2_a0tk4"]
+[ext_resource type="Texture2D" uid="uid://bwblof0t0hte1" path="res://assets/space-pano-hd.jpg" id="4_jka67"]
+[ext_resource type="Texture2D" path="res://assets/space.png" id="4_r3fl7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(40.592308, 8.440063, 18.691925)
@@ -10,33 +12,52 @@ size = Vector3(40.592308, 8.440063, 18.691925)
 [sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
 size = Vector3(16.54599, 2.9060059, 24.297958)
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jka67"]
+panorama = ExtResource("4_jka67")
+
+[sub_resource type="Sky" id="Sky_i5arm"]
+sky_material = SubResource("PanoramaSkyMaterial_jka67")
+
+[sub_resource type="Environment" id="Environment_wc5p8"]
+background_mode = 2
+sky = SubResource("Sky_i5arm")
+
 [node name="Node3D" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Enterprise" type="StaticBody3D" parent="."]
 script = ExtResource("1_a0tk4")
 
-[node name="enterprise" parent="StaticBody3D" instance=ExtResource("1_noarx")]
+[node name="enterprise-model" parent="Enterprise" instance=ExtResource("1_noarx")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enterprise"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34788132, 2.1109009, 0.024673462)
 shape = SubResource("BoxShape3D_noarx")
 debug_color = Color(0, 0.649849, 0.109332375, 1)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="BirdOfPrey" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, 4)
 visible = false
 script = ExtResource("1_a0tk4")
 
-[node name="bird-o-prey" parent="StaticBody3D2" instance=ExtResource("2_a0tk4")]
+[node name="bird-o-prey-model" parent="BirdOfPrey" instance=ExtResource("2_a0tk4")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BirdOfPrey"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4996796, 0.5531006, 4.016487)
 shape = SubResource("BoxShape3D_a0tk4")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.4058276, 0, -1.8978906, 0, 1, 0, 0.44012234, 0, 0.4058276, 0, 0, 33.193718)
+fov = 90.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.767876, 26.10661)
 light_energy = 11.551
 omni_range = 518.277
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wc5p8")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+visible = false
+texture = ExtResource("4_r3fl7")
