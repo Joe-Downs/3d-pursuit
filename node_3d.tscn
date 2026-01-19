@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://kbpgmtsd7bv2"]
+[gd_scene load_steps=10 format=3 uid="uid://kbpgmtsd7bv2"]
 
 [ext_resource type="Script" uid="uid://cpsxuj07q1drc" path="res://ship.gd" id="1_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://da6skqrp425xh" path="res://assets/enterprise.glb" id="1_noarx"]
 [ext_resource type="PackedScene" uid="uid://dteso3bdlgpgi" path="res://assets/bird-o-prey.glb" id="2_a0tk4"]
 [ext_resource type="Texture2D" uid="uid://bwblof0t0hte1" path="res://assets/space-pano-hd.jpg" id="4_jka67"]
-[ext_resource type="Texture2D" path="res://assets/space.png" id="4_r3fl7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(40.592308, 8.440063, 18.691925)
@@ -57,7 +56,3 @@ omni_range = 518.277
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wc5p8")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-visible = false
-texture = ExtResource("4_r3fl7")
