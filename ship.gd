@@ -2,6 +2,9 @@ extends StaticBody3D
 
 enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
 
+var directions = []
+const MAX_DIRECTIONS = 3
+
 func shoot():
 	return
 
@@ -50,8 +53,12 @@ func move_and_rotate(delta, direction: Array, hard=false, speed=0):
 func _init():
 	print("Initializing ships...")
 	seed(12345)
+	for i in range(MAX_DIRECTIONS):
+		directions.append(0)
 
 func _process(delta):
-	var directions = [Direction.FORWARD, Direction.UP, Direction.LEFT]
+	for i in range(MAX_DIRECTIONS):
+		directions[i] = randi() % len(Direction)
+	print(directions)
 	move_and_rotate(delta, directions, false, 1)
 	return
