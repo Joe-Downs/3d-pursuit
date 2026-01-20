@@ -1,11 +1,15 @@
+class_name Ship
 extends StaticBody3D
+
+
+# ================================== Variables =================================
+@export var ENEMY: Node
+static var MAX_DIRECTIONS = 3
+var destination := Vector3()
 
 enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
 
-var destination := Vector3()
-var directions = []
-const MAX_DIRECTIONS = 3
-
+# =================================== Methods ==================================
 func shoot():
 	return
 
@@ -67,7 +71,7 @@ func move_and_rotate(delta, direction: Array, hard=false, change=false, speed=0)
 	rotation += Vector3(roll, yaw, pitch)
 	return
 
-func _check_coord_distance(src: Vector3, dest: Vector3, margin: float = 5.0) -> bool:
+func _check_coord_distance(src: Vector3, dest: Vector3, margin: float = 1.0) -> bool:
 	# Check if two coords are within some margin of each other
 	if abs(src.distance_to(dest)) <= margin:
 		print("Close enough to the destination!")
@@ -76,21 +80,17 @@ func _check_coord_distance(src: Vector3, dest: Vector3, margin: float = 5.0) -> 
 		return false
 
 func _rand_coord() -> int:
+	# TODO: this needs to be something like [-100,100]. Right now, it's only
+	# [0,100].
 	return randi() % 100
 
 func choose_point() -> Vector3:
 	# Choose some point away from the ship and navigate there
-	var dest := Vector3()
-	dest.x = _rand_coord()
-	dest.y = _rand_coord()
-	dest.z = _rand_coord()
-	return dest
+	return ENEMY.position
 
 func _init():
 	print("Initializing ships...")
 	seed(12345)
-	for i in range(MAX_DIRECTIONS):
-		directions.append(Direction.FORWARD)
 
 func _process(delta):
 	var change = false

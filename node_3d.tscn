@@ -24,8 +24,9 @@ sky = SubResource("Sky_i5arm")
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Enterprise" type="StaticBody3D" parent="."]
+[node name="Enterprise" type="StaticBody3D" parent="." node_paths=PackedStringArray("ENEMY")]
 script = ExtResource("1_jka67")
+ENEMY = NodePath("../BirdOfPrey")
 
 [node name="enterprise-model" parent="Enterprise" instance=ExtResource("1_noarx")]
 
@@ -34,9 +35,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34788132, 2.1109009, 0.024
 shape = SubResource("BoxShape3D_noarx")
 debug_color = Color(0, 0.649849, 0.109332375, 1)
 
-[node name="BirdOfPrey" type="StaticBody3D" parent="."]
+[node name="BirdOfPrey" type="StaticBody3D" parent="." node_paths=PackedStringArray("ENEMY")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, 4)
 script = ExtResource("3_i5arm")
+ENEMY = NodePath("../Enterprise")
 
 [node name="bird-o-prey-model" parent="BirdOfPrey" instance=ExtResource("2_a0tk4")]
 
