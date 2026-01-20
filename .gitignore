@@ -1,5 +1,6 @@
 # Ignore recorded footage
 *.avi
+*.mp4
 
 # Godot 4+ specific ignores
 .godot/
