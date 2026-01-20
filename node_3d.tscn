@@ -56,3 +56,6 @@ omni_range = 518.277
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wc5p8")
+
+[node name="top-down-camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 500, 0)
