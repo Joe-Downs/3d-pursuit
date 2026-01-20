@@ -46,7 +46,7 @@ shape = SubResource("BoxShape3D_a0tk4")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.4058276, 0, -1.8978906, 0, 1, 0, 0.44012234, 0, 0.4058276, 0, 0, 33.193718)
+transform = Transform3D(-4.3500084e-08, 0.098208204, -0.9951659, 4.2928168e-09, 0.9951659, 0.098208204, 1, 0, -4.371139e-08, -25.146833, 6.0404673, 0)
 fov = 90.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
