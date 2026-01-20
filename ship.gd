@@ -1,14 +1,57 @@
 extends StaticBody3D
 
-var speed = 400
-var angular_speed = PI
+enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
+
+func shoot():
+	return
+
+func move_and_rotate(delta, direction: Array, hard=false, speed=0):
+	# We want to steer in the following directions, each with "HARD" variants:
+	# - UP
+	# - DOWN
+	# - LEFT
+	# - RIGHT
+
+	# Forward/Backward
+	var surge = 0
+	# Left/Right
+	var sway = 0
+	# Up/Down
+	var heave = 0
+
+	var multiplier = speed * delta
+
+	if hard:
+		multiplier *= 10
+
+	for d in direction:
+		match d:
+			Direction.FORWARD:
+				surge = 1
+			Direction.BACKWARD:
+				surge = -1
+			Direction.UP:
+				heave = 1
+			Direction.DOWN:
+				heave = -1
+			Direction.LEFT:
+				sway = -1
+			Direction.RIGHT:
+				sway = 1
+
+	surge *= multiplier
+	heave *= multiplier
+	sway *= multiplier
+
+	position += Vector3(surge,heave,sway)
+	#rotation += Vector3(0,0,0.5*delta)
+	return
 
 func _init():
 	print("Initializing ships...")
+	seed(12345)
 
 func _process(delta):
-	#rotation += angular_speed * delta
-#
-	#var velocity = Vector3.UP.rotated(rotation, 15) * speed
-
-	position += Vector3(5*delta,0,0)
+	var directions = [Direction.FORWARD, Direction.UP, Direction.LEFT]
+	move_and_rotate(delta, directions, false, 1)
+	return
