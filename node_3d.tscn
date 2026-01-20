@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://kbpgmtsd7bv2"]
+[gd_scene load_steps=11 format=3 uid="uid://kbpgmtsd7bv2"]
 
-[ext_resource type="Script" uid="uid://cpsxuj07q1drc" path="res://ship.gd" id="1_a0tk4"]
+[ext_resource type="Script" uid="uid://dtgw0iu4b7a0j" path="res://enterprise.gd" id="1_jka67"]
 [ext_resource type="PackedScene" uid="uid://da6skqrp425xh" path="res://assets/enterprise.glb" id="1_noarx"]
 [ext_resource type="PackedScene" uid="uid://dteso3bdlgpgi" path="res://assets/bird-o-prey.glb" id="2_a0tk4"]
+[ext_resource type="Script" uid="uid://cylxo7g45bla1" path="res://bird_of_prey.gd" id="3_i5arm"]
 [ext_resource type="Texture2D" uid="uid://bwblof0t0hte1" path="res://assets/space-pano-hd.jpg" id="4_jka67"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
@@ -24,7 +25,7 @@ sky = SubResource("Sky_i5arm")
 [node name="Node3D" type="Node3D"]
 
 [node name="Enterprise" type="StaticBody3D" parent="."]
-script = ExtResource("1_a0tk4")
+script = ExtResource("1_jka67")
 
 [node name="enterprise-model" parent="Enterprise" instance=ExtResource("1_noarx")]
 
@@ -35,8 +36,7 @@ debug_color = Color(0, 0.649849, 0.109332375, 1)
 
 [node name="BirdOfPrey" type="StaticBody3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, 4)
-visible = false
-script = ExtResource("1_a0tk4")
+script = ExtResource("3_i5arm")
 
 [node name="bird-o-prey-model" parent="BirdOfPrey" instance=ExtResource("2_a0tk4")]
 
