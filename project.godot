@@ -17,4 +17,4 @@ config/icon="res://icon.svg"
 
 [editor]
 
-movie_writer/movie_file="C:/Users/Joe/Videos/demo.avi"
+movie_writer/movie_file="demo.avi"
