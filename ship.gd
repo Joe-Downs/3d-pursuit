@@ -4,6 +4,7 @@ extends StaticBody3D
 
 # ================================== Variables =================================
 @export var ENEMY: Node
+@export var SPEED: int = 1
 static var MAX_DIRECTIONS = 3
 var destination := Vector3()
 
@@ -104,5 +105,5 @@ func _process(delta):
 		print("Changing directions")
 		destination = choose_point()
 	#move_and_rotate(delta, directions, false, change, 1)
-	position = position.lerp(destination, delta*2)
+	position = position.lerp(destination, delta * SPEED)
 	return

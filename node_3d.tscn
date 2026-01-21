@@ -39,6 +39,7 @@ debug_color = Color(0, 0.649849, 0.109332375, 1)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, 4)
 script = ExtResource("3_i5arm")
 ENEMY = NodePath("../Enterprise")
+SPEED = 2
 
 [node name="bird-o-prey-model" parent="BirdOfPrey" instance=ExtResource("2_a0tk4")]
 
