@@ -85,6 +85,13 @@ func _rand_coord() -> int:
 	# [0,100].
 	return randi() % 100
 
+func _rand_point() -> Vector3:
+	var point := Vector3()
+	point.x = _rand_coord()
+	point.z = _rand_coord()
+	point.y = _rand_coord()
+	return point
+
 func choose_point() -> Vector3:
 	# Choose some point away from the ship and navigate there
 	return ENEMY.position
@@ -103,7 +110,7 @@ func _process(delta):
 	if !(randi() % 250):
 		change = true
 		print("Changing directions")
-		destination = choose_point()
+		destination = _rand_point()
 	#move_and_rotate(delta, directions, false, change, 1)
 	position = position.lerp(destination, delta * SPEED)
 	return
