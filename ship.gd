@@ -1,6 +1,5 @@
 class_name Ship
-extends StaticBody3D
-
+extends Area3D
 
 # ================================== Variables =================================
 @export var ENEMY: Node
