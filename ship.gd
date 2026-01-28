@@ -17,8 +17,7 @@ enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
 # =================================== Methods ==================================
 func explode(delta):
 	destroyed = true
-	explosion.position = position
-	explosion.scale = lerp(explosion.scale, Vector3(150,150,150), delta / explode_speed)
+	explosion.scale = lerp(explosion.scale, Vector3(50,50,50), delta / explode_speed)
 	explosion_material.albedo_color = lerp(explosion_material.albedo_color, Color.from_rgba8(255,10,10,255), delta / explode_speed)
 	explosion_material.emission = lerp(explosion_material.emission, Color.from_rgba8(255,10,10,255), delta / explode_speed)
 	explosion_material.emission_energy_multiplier = lerp(explosion_material.emission_energy_multiplier, 0.0, delta / explode_speed)
@@ -29,7 +28,8 @@ func shoot(target: Vector3) -> bool:
 	#    enemy.blowup()
 	var laser = get_node("./Laser")
 	if ENEMY in laser.get_overlapping_areas():
-		print("BOOM!")
+		print("BOOM! %s has been hit." % self.name)
+		ENEMY.destroyed = true
 		return true
 	return false
 
@@ -113,7 +113,7 @@ func _rand_point() -> Vector3:
 
 func choose_point() -> Vector3:
 	# Choose some point away from the ship and navigate there
-	return ENEMY.position
+	return ENEMY.position - Vector3(0,0,15)
 
 func _init():
 	print("Initializing ships...")
@@ -142,10 +142,10 @@ func _process(delta):
 		destination = _rand_point()
 	#move_and_rotate(delta, directions, false, change, 1)
 
-	if !destroyed:
+	if !hit and !destroyed:
 		position = position.lerp(destination, delta * SPEED)
+		hit = shoot(ENEMY.position)
 
-	hit = shoot(ENEMY.position)
-	if hit:
-		ENEMY.explode(delta)
+	if destroyed:
+		explode(delta)
 	return
