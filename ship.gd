@@ -6,12 +6,32 @@ extends Area3D
 @export var SPEED: int = 1
 static var MAX_DIRECTIONS = 3
 var destination := Vector3()
+var explosion: MeshInstance3D
+var explosion_material: StandardMaterial3D
+var explode_speed: float= 0.3
+var hit: bool = false
+var destroyed: bool = false
 
 enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
 
 # =================================== Methods ==================================
-func shoot():
+func explode(delta):
+	destroyed = true
+	explosion.position = position
+	explosion.scale = lerp(explosion.scale, Vector3(150,150,150), delta / explode_speed)
+	explosion_material.albedo_color = lerp(explosion_material.albedo_color, Color.from_rgba8(255,10,10,255), delta / explode_speed)
+	explosion_material.emission = lerp(explosion_material.emission, Color.from_rgba8(255,10,10,255), delta / explode_speed)
+	explosion_material.emission_energy_multiplier = lerp(explosion_material.emission_energy_multiplier, 0.0, delta / explode_speed)
 	return
+
+func shoot(target: Vector3) -> bool:
+	# if enemy in self.laser:
+	#    enemy.blowup()
+	var laser = get_node("./Laser")
+	if ENEMY in laser.get_overlapping_areas():
+		print("BOOM!")
+		return true
+	return false
 
 func move_and_rotate(delta, direction: Array, hard=false, change=false, speed=0):
 	# We want to steer in the following directions, each with "HARD" variants:
@@ -98,6 +118,16 @@ func choose_point() -> Vector3:
 func _init():
 	print("Initializing ships...")
 	seed(12345)
+	explosion = MeshInstance3D.new()
+	explosion.set_mesh(SphereMesh.new())
+	explosion_material = StandardMaterial3D.new()
+	var start_color: Color = Color.from_rgba8(255, 183, 66, 255)
+	explosion_material.albedo_color = start_color
+	explosion_material.emission = start_color
+	explosion_material.emission_enabled = true
+	explosion.mesh.surface_set_material(0, explosion_material)
+	add_child(explosion)
+	return
 
 func _process(delta):
 	var change = false
@@ -111,5 +141,11 @@ func _process(delta):
 		print("Changing directions")
 		destination = _rand_point()
 	#move_and_rotate(delta, directions, false, change, 1)
-	position = position.lerp(destination, delta * SPEED)
+
+	if !destroyed:
+		position = position.lerp(destination, delta * SPEED)
+
+	hit = shoot(ENEMY.position)
+	if hit:
+		ENEMY.explode(delta)
 	return
