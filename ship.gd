@@ -135,16 +135,17 @@ func _process(delta):
 	if _check_coord_distance(position, destination):
 		destination = choose_point()
 		print("Desired Position: %s" % destination)
-	# Chance to change direction
+		# Chance to change direction
 	if !(randi() % 250):
 		change = true
 		print("Changing directions")
 		destination = _rand_point()
-	#move_and_rotate(delta, directions, false, change, 1)
+		#move_and_rotate(delta, directions, false, change, 1)
 
 	if !hit and !destroyed:
 		position = position.lerp(destination, delta * SPEED)
-		hit = shoot(ENEMY.position)
+		self.look_at(destination, Vector3.UP, true)
+		#hit = shoot(ENEMY.position)
 
 	if destroyed:
 		explode(delta)

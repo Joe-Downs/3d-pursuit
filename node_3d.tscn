@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bwblof0t0hte1" path="res://assets/space-pano-hd.jpg" id="4_jka67"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
-size = Vector3(40.592308, 8.440063, 18.691925)
+size = Vector3(19.023565, 8.014481, 40.519836)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i5arm"]
 points = PackedVector3Array(-25, -50, -0.0048942566, -24.52036, -50, -4.8796005, -24.52036, -50, 4.8747063, -0.0048942566, 50, -0.0048942566, -23.101017, -50, -9.568324, -23.101017, -50, 9.563431, 25, -50, -0.0048942566, 24.515469, -50, -4.8796005, 23.096127, -50, -9.568324, 20.786022, -50, -13.8899765, 17.67326, -50, -17.678152, 13.885082, -50, -20.790916, 9.563431, -50, -23.101017, 4.8747063, -50, -24.52036, -0.0048942566, -50, -25, -4.8796005, -50, -24.52036, -9.568324, -50, -23.101017, -13.8899765, -50, -20.790916, -17.678152, -50, -17.678152, -20.790916, -50, -13.8899765, -20.790916, -50, 13.885082, -17.678152, -50, 17.67326, -13.8899765, -50, 20.786022, -9.568324, -50, 23.096127, -4.8796005, -50, 24.515469, -0.0048942566, -50, 25, 4.8747063, -50, 24.515469, 9.563431, -50, 23.096127, 13.885082, -50, 20.786022, 17.67326, -50, 17.67326, 20.786022, -50, 13.885082, 23.096127, -50, 9.563431, 24.515469, -50, 4.8747063)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
-size = Vector3(16.54599, 2.9060059, 24.297958)
+size = Vector3(24.283026, 2.923584, 16.576103)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wc5p8"]
 points = PackedVector3Array(-25, -50, -0.0048942566, -24.52036, -50, -4.8796005, -24.52036, -50, 4.8747063, -0.0048942566, 50, -0.0048942566, -23.101017, -50, -9.568324, -23.101017, -50, 9.563431, 25, -50, -0.0048942566, 24.515469, -50, -4.8796005, 23.096127, -50, -9.568324, 20.786022, -50, -13.8899765, 17.67326, -50, -17.678152, 13.885082, -50, -20.790916, 9.563431, -50, -23.101017, 4.8747063, -50, -24.52036, -0.0048942566, -50, -25, -4.8796005, -50, -24.52036, -9.568324, -50, -23.101017, -13.8899765, -50, -20.790916, -17.678152, -50, -17.678152, -20.790916, -50, -13.8899765, -20.790916, -50, 13.885082, -17.678152, -50, 17.67326, -13.8899765, -50, 20.786022, -9.568324, -50, 23.096127, -4.8796005, -50, 24.515469, -0.0048942566, -50, 25, 4.8747063, -50, 24.515469, 9.563431, -50, 23.096127, 13.885082, -50, 20.786022, 17.67326, -50, 17.67326, 20.786022, -50, 13.885082, 23.096127, -50, 9.563431, 24.515469, -50, 4.8747063)
@@ -36,14 +36,14 @@ script = ExtResource("1_jka67")
 ENEMY = NodePath("../BirdOfPrey")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enterprise" unique_id=663911676]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34788132, 2.1109009, 0.024673462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020346642, 2.0045242, -0.33547974)
 shape = SubResource("BoxShape3D_noarx")
 debug_color = Color(0, 0.649849, 0.109332375, 1)
 
 [node name="enterprise-model" parent="Enterprise" unique_id=352517637 instance=ExtResource("1_noarx")]
 
 [node name="Laser" type="Area3D" parent="Enterprise" unique_id=1454961271]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 20.041143)
 
 [node name="Cone" parent="Enterprise/Laser" unique_id=1496419526 instance=ExtResource("3_wc5p8")]
 visible = false
@@ -53,21 +53,19 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 
 shape = SubResource("ConvexPolygonShape3D_i5arm")
 
 [node name="BirdOfPrey" type="Area3D" parent="." unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.023186, 0, 0)
 script = ExtResource("3_i5arm")
 ENEMY = NodePath("../Enterprise")
 SPEED = 2
 
-[node name="bird-o-prey-model" parent="BirdOfPrey" unique_id=1701541648 instance=ExtResource("2_a0tk4")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4, 0, 4)
+[node name="bird-o-prey-model" parent="BirdOfPrey" unique_id=684184032 instance=ExtResource("2_a0tk4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BirdOfPrey" unique_id=1721444363]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.4996791, 0.5531006, -0.016487598)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.01631287, 0.14406443, -2.2015297)
 shape = SubResource("BoxShape3D_a0tk4")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="Laser" type="Area3D" parent="BirdOfPrey" unique_id=969871380]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.842, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 6.357482)
 
 [node name="Cone" parent="BirdOfPrey/Laser" unique_id=438584519 instance=ExtResource("3_wc5p8")]
 visible = false
@@ -77,8 +75,7 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 
 shape = SubResource("ConvexPolygonShape3D_wc5p8")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=120409338]
-transform = Transform3D(-4.3500084e-08, 0.098208204, -0.9951659, 4.2928168e-09, 0.9951659, 0.098208204, 1, 0, -4.371139e-08, -25.146833, 6.0404673, 0)
-visible = false
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 6.04, -25)
 fov = 90.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2004183207]
