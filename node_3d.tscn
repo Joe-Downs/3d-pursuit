@@ -52,6 +52,10 @@ visible = false
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_i5arm")
 
+[node name="Camera3D" type="Camera3D" parent="Enterprise" unique_id=120409338]
+transform = Transform3D(-1, 0, -8.742278e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
+fov = 90.0
+
 [node name="BirdOfPrey" type="Area3D" parent="." unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
 script = ExtResource("3_i5arm")
 ENEMY = NodePath("../Enterprise")
@@ -73,10 +77,6 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BirdOfPrey/Laser" unique_id=334425826]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_wc5p8")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=120409338]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 6.04, -25)
-fov = 90.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2004183207]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
