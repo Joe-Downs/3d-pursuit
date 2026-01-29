@@ -5,6 +5,7 @@ extends Area3D
 @export var ENEMY: Node
 @export var SPEED: int = 1
 static var MAX_DIRECTIONS = 3
+const SIM_SPEED = 0.5
 var destination := Vector3()
 var lineOfSight: RayCast3D
 var laser: Node3D
@@ -152,7 +153,7 @@ func _process(delta):
 		#move_and_rotate(delta, directions, false, change, 1)
 
 	if !hit and !destroyed:
-		position = position.lerp(destination, delta * SPEED)
+		position = position.lerp(destination, delta * SPEED * SIM_SPEED)
 		self.look_at(destination, Vector3.UP, true)
 
 		lineOfSight.force_raycast_update()
