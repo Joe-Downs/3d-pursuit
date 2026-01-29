@@ -7,6 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://bvuom0yj785ju" path="res://cone.tscn" id="3_wc5p8"]
 [ext_resource type="Texture2D" uid="uid://bwblof0t0hte1" path="res://assets/space-pano-hd.jpg" id="4_jka67"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jka67"]
+panorama = ExtResource("4_jka67")
+
+[sub_resource type="Sky" id="Sky_i5arm"]
+sky_material = SubResource("PanoramaSkyMaterial_jka67")
+
+[sub_resource type="Environment" id="Environment_wc5p8"]
+background_mode = 2
+sky = SubResource("Sky_i5arm")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(19.023565, 8.014481, 40.519836)
 
@@ -19,91 +29,110 @@ size = Vector3(24.283026, 2.923584, 16.576103)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wc5p8"]
 points = PackedVector3Array(-25, -50, -0.0048942566, -24.52036, -50, -4.8796005, -24.52036, -50, 4.8747063, -0.0048942566, 50, -0.0048942566, -23.101017, -50, -9.568324, -23.101017, -50, 9.563431, 25, -50, -0.0048942566, 24.515469, -50, -4.8796005, 23.096127, -50, -9.568324, 20.786022, -50, -13.8899765, 17.67326, -50, -17.678152, 13.885082, -50, -20.790916, 9.563431, -50, -23.101017, 4.8747063, -50, -24.52036, -0.0048942566, -50, -25, -4.8796005, -50, -24.52036, -9.568324, -50, -23.101017, -13.8899765, -50, -20.790916, -17.678152, -50, -17.678152, -20.790916, -50, -13.8899765, -20.790916, -50, 13.885082, -17.678152, -50, 17.67326, -13.8899765, -50, 20.786022, -9.568324, -50, 23.096127, -4.8796005, -50, 24.515469, -0.0048942566, -50, 25, 4.8747063, -50, 24.515469, 9.563431, -50, 23.096127, 13.885082, -50, 20.786022, 17.67326, -50, 17.67326, 20.786022, -50, 13.885082, 23.096127, -50, 9.563431, 24.515469, -50, 4.8747063)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jka67"]
-panorama = ExtResource("4_jka67")
-
-[sub_resource type="Sky" id="Sky_i5arm"]
-sky_material = SubResource("PanoramaSkyMaterial_jka67")
-
-[sub_resource type="Environment" id="Environment_wc5p8"]
-background_mode = 2
-sky = SubResource("Sky_i5arm")
-
 [node name="Node3D" type="Node3D" unique_id=1045918936]
 
-[node name="Enterprise" type="Area3D" parent="." unique_id=762869439 node_paths=PackedStringArray("ENEMY")]
-script = ExtResource("1_jka67")
-ENEMY = NodePath("../BirdOfPrey")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enterprise" unique_id=663911676]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020346642, 2.0045242, -0.33547974)
-shape = SubResource("BoxShape3D_noarx")
-debug_color = Color(0, 0.649849, 0.109332375, 1)
-
-[node name="enterprise-model" parent="Enterprise" unique_id=352517637 instance=ExtResource("1_noarx")]
-
-[node name="Laser" type="Area3D" parent="Enterprise" unique_id=1454961271]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 20.041143)
-
-[node name="Cone" parent="Enterprise/Laser" unique_id=1496419526 instance=ExtResource("3_wc5p8")]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enterprise/Laser" unique_id=814805816]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_i5arm")
-
-[node name="Camera3D" type="Camera3D" parent="Enterprise" unique_id=120409338]
-transform = Transform3D(-1, 0, -8.742278e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
-fov = 90.0
-
-[node name="LineOfSight" type="RayCast3D" parent="Enterprise" unique_id=1041528265]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.246372)
-target_position = Vector3(0, 0, 500)
-collide_with_areas = true
-debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
-debug_shape_thickness = 5
-
-[node name="BirdOfPrey" type="Area3D" parent="." unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
-script = ExtResource("3_i5arm")
-ENEMY = NodePath("../Enterprise")
-
-[node name="bird-o-prey-model" parent="BirdOfPrey" unique_id=684184032 instance=ExtResource("2_a0tk4")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BirdOfPrey" unique_id=1721444363]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.01631287, 0.14406443, -2.2015297)
-shape = SubResource("BoxShape3D_a0tk4")
-debug_color = Color(1, 0, 0, 1)
-
-[node name="Laser" type="Area3D" parent="BirdOfPrey" unique_id=969871380]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 6.357482)
-
-[node name="Cone" parent="BirdOfPrey/Laser" unique_id=438584519 instance=ExtResource("3_wc5p8")]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BirdOfPrey/Laser" unique_id=334425826]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_wc5p8")
-
-[node name="LineOfSight" type="RayCast3D" parent="BirdOfPrey" unique_id=950993581]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3675585)
-target_position = Vector3(0, 0, 500)
-hit_from_inside = true
-debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
-debug_shape_thickness = 5
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1927166841]
+environment = SubResource("Environment_wc5p8")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2004183207]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
 omni_range = 4096.0
 omni_attenuation = 0.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1927166841]
-environment = SubResource("Environment_wc5p8")
-
-[node name="top-down-camera" type="Camera3D" parent="." unique_id=1468245089]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 500, 0)
-visible = false
-
 [node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1222496783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
 omni_range = 4096.0
 omni_attenuation = 0.0
+
+[node name="Control" type="Control" parent="." unique_id=1092643557]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=1520665996]
+layout_mode = 1
+offset_right = 1028.0
+offset_bottom = 512.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer" unique_id=826663184]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer" unique_id=1687110269]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Enterprise" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" unique_id=762869439 node_paths=PackedStringArray("ENEMY")]
+script = ExtResource("1_jka67")
+ENEMY = NodePath("../../../SubViewportContainer2/SubViewport/BirdOfPrey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=663911676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020346642, 2.0045242, -0.33547974)
+shape = SubResource("BoxShape3D_noarx")
+debug_color = Color(0, 0.649849, 0.109332375, 1)
+
+[node name="enterprise-model" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=352517637 instance=ExtResource("1_noarx")]
+
+[node name="Laser" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=1454961271]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 20.041143)
+
+[node name="Cone" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise/Laser" unique_id=1496419526 instance=ExtResource("3_wc5p8")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise/Laser" unique_id=814805816]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_i5arm")
+
+[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=120409338]
+transform = Transform3D(-1, 0, -8.742278e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
+keep_aspect = 0
+fov = 90.0
+
+[node name="LineOfSight" type="RayCast3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=1041528265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.246372)
+target_position = Vector3(0, 0, 500)
+collide_with_areas = true
+debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
+debug_shape_thickness = 5
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control/HBoxContainer" unique_id=603026238]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer2" unique_id=518793042]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="BirdOfPrey" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
+script = ExtResource("3_i5arm")
+ENEMY = NodePath("../../../SubViewportContainer/SubViewport/Enterprise")
+
+[node name="bird-o-prey-model" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=684184032 instance=ExtResource("2_a0tk4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=1721444363]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.01631287, 0.14406443, -2.2015297)
+shape = SubResource("BoxShape3D_a0tk4")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="Laser" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=969871380]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 6.357482)
+
+[node name="Cone" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey/Laser" unique_id=438584519 instance=ExtResource("3_wc5p8")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey/Laser" unique_id=334425826]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_wc5p8")
+
+[node name="LineOfSight" type="RayCast3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=950993581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3675585)
+target_position = Vector3(0, 0, 500)
+hit_from_inside = true
+debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
+debug_shape_thickness = 5
+
+[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=292148981]
+transform = Transform3D(-1, 0, -8.742277e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
+keep_aspect = 0
+fov = 90.0
