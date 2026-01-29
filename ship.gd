@@ -117,7 +117,9 @@ func choose_point() -> Vector3:
 
 func _init():
 	print("Initializing ships...")
+	#randomize()
 	seed(12345)
+	position = _rand_point()
 	explosion = MeshInstance3D.new()
 	explosion.set_mesh(SphereMesh.new())
 	explosion_material = StandardMaterial3D.new()
@@ -145,7 +147,7 @@ func _process(delta):
 	if !hit and !destroyed:
 		position = position.lerp(destination, delta * SPEED)
 		self.look_at(destination, Vector3.UP, true)
-		#hit = shoot(ENEMY.position)
+		hit = shoot(ENEMY.position)
 
 	if destroyed:
 		explode(delta)
