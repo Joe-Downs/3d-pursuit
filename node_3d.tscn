@@ -63,9 +63,10 @@ size_flags_horizontal = 3
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="Enterprise" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" unique_id=762869439 node_paths=PackedStringArray("ENEMY")]
+[node name="Enterprise" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" unique_id=762869439 node_paths=PackedStringArray("ENEMY", "CAMERA")]
 script = ExtResource("1_jka67")
 ENEMY = NodePath("../../../SubViewportContainer2/SubViewport/BirdOfPrey")
+CAMERA = NodePath("../EnterpriseCam")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=663911676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020346642, 2.0045242, -0.33547974)
@@ -84,17 +85,17 @@ visible = false
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 50, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_i5arm")
 
-[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=120409338]
-transform = Transform3D(-1, 0, -8.742278e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
-keep_aspect = 0
-fov = 90.0
-
 [node name="LineOfSight" type="RayCast3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/Enterprise" unique_id=1041528265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.246372)
 target_position = Vector3(0, 0, 500)
 collide_with_areas = true
 debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
 debug_shape_thickness = 5
+
+[node name="EnterpriseCam" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" unique_id=120409338]
+transform = Transform3D(-1, 0, -8.742277e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 30, -50)
+keep_aspect = 0
+fov = 90.0
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="Control/HBoxContainer" unique_id=603026238]
 layout_mode = 2
@@ -104,9 +105,10 @@ size_flags_horizontal = 3
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="BirdOfPrey" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
+[node name="BirdOfPrey" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" unique_id=2123342841 node_paths=PackedStringArray("ENEMY", "CAMERA")]
 script = ExtResource("3_i5arm")
 ENEMY = NodePath("../../../SubViewportContainer/SubViewport/Enterprise")
+CAMERA = NodePath("../BirdOfPreyCam")
 
 [node name="bird-o-prey-model" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=684184032 instance=ExtResource("2_a0tk4")]
 
@@ -132,7 +134,7 @@ hit_from_inside = true
 debug_shape_custom_color = Color(17.694866, 0, 18.892157, 1)
 debug_shape_thickness = 5
 
-[node name="Camera3D" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport/BirdOfPrey" unique_id=292148981]
-transform = Transform3D(-1, 0, -8.742277e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 32.805744, -50.492386)
+[node name="BirdOfPreyCam" type="Camera3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" unique_id=292148981]
+transform = Transform3D(-1, 0, -8.742277e-08, -3.6821962e-08, 0.9069705, 0.42119414, 7.9289876e-08, 0.42119414, -0.9069705, 0, 30, -50)
 keep_aspect = 0
 fov = 90.0

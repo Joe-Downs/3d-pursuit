@@ -4,6 +4,8 @@ extends Area3D
 # ================================== Variables =================================
 @export var ENEMY: Node
 @export var SPEED: int = 1
+@export var CAMERA: Camera3D
+
 static var MAX_DIRECTIONS = 3
 const SIM_SPEED = 0.5
 var destination := Vector3()
@@ -14,6 +16,7 @@ var explosion_material: StandardMaterial3D
 var explode_speed: float= 0.3
 var hit: bool = false
 var destroyed: bool = false
+var cameraOffset: Vector3 = Vector3(0, 30, -15)
 
 enum Direction {FORWARD, BACKWARD, UP, DOWN, LEFT, RIGHT}
 
@@ -137,6 +140,8 @@ func _init():
 func _ready():
 	laser = get_node("Laser")
 	lineOfSight = get_node("./LineOfSight")
+	CAMERA.position = to_global(cameraOffset)
+	CAMERA.look_at(position, Vector3.UP)
 	return
 
 func _process(delta):
@@ -154,6 +159,8 @@ func _process(delta):
 
 	if !hit and !destroyed:
 		position = position.lerp(destination, delta * SPEED * SIM_SPEED)
+		CAMERA.position = CAMERA.position.lerp(to_global(cameraOffset), delta * 0.5)
+		CAMERA.look_at(position, Vector3.UP)
 		self.look_at(destination, Vector3.UP, true)
 
 		lineOfSight.force_raycast_update()
