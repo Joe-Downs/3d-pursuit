@@ -55,7 +55,7 @@ shape = SubResource("ConvexPolygonShape3D_i5arm")
 [node name="BirdOfPrey" type="Area3D" parent="." unique_id=2123342841 node_paths=PackedStringArray("ENEMY")]
 script = ExtResource("3_i5arm")
 ENEMY = NodePath("../Enterprise")
-SPEED = 2
+SPEED = 4
 
 [node name="bird-o-prey-model" parent="BirdOfPrey" unique_id=684184032 instance=ExtResource("2_a0tk4")]
 
@@ -79,9 +79,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 6
 fov = 90.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2004183207]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.767876, 26.10661)
-light_energy = 11.551
-omni_range = 518.277
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+omni_range = 750.0
+omni_attenuation = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1927166841]
 environment = SubResource("Environment_wc5p8")
@@ -89,3 +89,8 @@ environment = SubResource("Environment_wc5p8")
 [node name="top-down-camera" type="Camera3D" parent="." unique_id=1468245089]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 500, 0)
 visible = false
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1222496783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
+omni_range = 750.0
+omni_attenuation = 0.0
