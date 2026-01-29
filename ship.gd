@@ -6,6 +6,8 @@ extends Area3D
 @export var SPEED: int = 1
 static var MAX_DIRECTIONS = 3
 var destination := Vector3()
+var lineOfSight: RayCast3D
+var laser: Node3D
 var explosion: MeshInstance3D
 var explosion_material: StandardMaterial3D
 var explode_speed: float= 0.3
@@ -26,9 +28,8 @@ func explode(delta):
 func shoot(target: Vector3) -> bool:
 	# if enemy in self.laser:
 	#    enemy.blowup()
-	var laser = get_node("./Laser")
 	if ENEMY in laser.get_overlapping_areas():
-		print("BOOM! %s has been hit." % self.name)
+		print("BOOM! %s has been hit." % ENEMY.name)
 		ENEMY.destroyed = true
 		return true
 	return false
@@ -102,7 +103,7 @@ func _check_coord_distance(src: Vector3, dest: Vector3, margin: float = 1.0) -> 
 func _rand_coord() -> int:
 	# TODO: this needs to be something like [-100,100]. Right now, it's only
 	# [0,100].
-	return randi() % 100
+	return randi() % 500
 
 func _rand_point() -> Vector3:
 	var point := Vector3()
@@ -117,9 +118,10 @@ func choose_point() -> Vector3:
 
 func _init():
 	print("Initializing ships...")
-	#randomize()
-	seed(12345)
+	randomize()
+	#seed(12345)
 	position = _rand_point()
+	
 	explosion = MeshInstance3D.new()
 	explosion.set_mesh(SphereMesh.new())
 	explosion_material = StandardMaterial3D.new()
@@ -130,23 +132,33 @@ func _init():
 	explosion.mesh.surface_set_material(0, explosion_material)
 	add_child(explosion)
 	return
+	
+func _ready():
+	laser = get_node("Laser")
+	lineOfSight = get_node("./LineOfSight")
+	return
 
 func _process(delta):
 	var change = false
 	#print("Current position: %s" % position)
 	if _check_coord_distance(position, destination):
 		destination = choose_point()
-		print("Desired Position: %s" % destination)
+		#print("Desired Position: %s" % destination)
 		# Chance to change direction
 	if !(randi() % 250):
 		change = true
-		print("Changing directions")
+		#print("Changing directions")
 		destination = _rand_point()
 		#move_and_rotate(delta, directions, false, change, 1)
 
 	if !hit and !destroyed:
 		position = position.lerp(destination, delta * SPEED)
 		self.look_at(destination, Vector3.UP, true)
+
+		lineOfSight.force_raycast_update()
+		if lineOfSight.is_colliding():
+			print("Enemy in sight! PIVOT!")
+			destination = _rand_point()
 		hit = shoot(ENEMY.position)
 
 	if destroyed:
