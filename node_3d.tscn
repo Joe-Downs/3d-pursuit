@@ -46,9 +46,11 @@ omni_attenuation = 0.0
 
 [node name="Control" type="Control" parent="." unique_id=1092643557]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -59,6 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer" unique_id=826663184]
 layout_mode = 2
@@ -67,7 +70,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer" unique_id=1687110269]
 handle_input_locally = false
-size = Vector2i(958, 1080)
+size = Vector2i(960, 1080)
 render_target_update_mode = 4
 
 [node name="Enterprise" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" unique_id=762869439 node_paths=PackedStringArray("ENEMY", "CAMERA")]
@@ -111,7 +114,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer2" unique_id=518793042]
 handle_input_locally = false
-size = Vector2i(958, 1080)
+size = Vector2i(960, 1080)
 render_target_update_mode = 4
 
 [node name="BirdOfPrey" type="Area3D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" unique_id=2123342841 node_paths=PackedStringArray("ENEMY", "CAMERA")]
